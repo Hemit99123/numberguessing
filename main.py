@@ -43,7 +43,7 @@ if number == guess:
 	# print(number)
 	print('\nFor this next part you will be asked to enter a number between 0 and 30 to try to guess a randomly generated number.')
 	# print(number)
-	print("\n\tYou've only ",
+	print("\n\tYou've only got",
 		number2,
 		" hints\n")
 
@@ -81,7 +81,7 @@ if number == guess:
 	# print(number)
 	print('\nFor this next part you will be asked to enter a number between 0 and 40 to try to guess a randomly generated number.')
 	# print(number)
-	print("\n\tYou've only ",
+	print("\n\tYou've only got",
 		number2,
 		" hints\n")
 
