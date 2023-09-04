@@ -1,106 +1,42 @@
-#Level 1 
 import random
-number = random.randint(1,20)
-number2 = random.randint(1,3)
-# print(number)
-print("\nWelcome to the first level of this number guessing game!")
-print('\nFor this next part you will be asked to enter a number between 0 and 20 to try to guess a randomly generated number.')
-print("\n CREDITS: HEMIT AND JASKEERAT")
-#print(number)
 
-#to show how many hints youve got
-print("\n\tYou've only got",
-	number2,
-	"hints\n")
+def play_game(level, max_num, max_hints):
+    print(f"\nWelcome to level {level} of this number guessing game!")
+    print(f"\nFor this next part, you will be asked to enter a number between 0 and {max_num} to try to guess a randomly generated number.")
+    print("\nCREDITS: HEMIT AND JASKEERAT")
+    print(f"\nYou've only got {max_hints} hints\n")
 
-count = 0
+    number = random.randint(1, max_num)
+    count = 0
 
-while count < number2:
-	count += 1
+    while count < max_hints:
+        count += 1
+        guess = int(input(f'\nPlease enter a number between 0 and {max_num}:'))
 
-	guess = int(input('\nPlease enter a number between 0 and 20:'))
+        if number == guess:
+            print(f"\nCongratulations! You did it in {count} try/tries.")
+            return True
+        elif number > guess:
+            print("\nYou guessed too small!")
+        elif number < guess:
+            print("\nYou guessed too high!")
 
-	if number == guess:
-		print("\nCongratulations you did it in ",
-			count, " try/tries")
-		break
-	elif number > guess:
-		print("\nYou guessed too small!")
-	elif number < guess:
-		print("\nYou Guessed too high!")
+    print(f"\nBetter luck next time! The number was {number}")
+    return False
 
-if count >= number2 :
-	print("\n Better luck next time! The number is %d" % number)
+if __name__ == "__main__":
+    levels = [
+        {"max_num": 20, "max_hints": 3},
+        {"max_num": 30, "max_hints": 3},
+        {"max_num": 40, "max_hints": 2}
+    ]
 
-
-
-# repeated but everyhing put into an if statement
-# level 2
-if number == guess:
-	print("\nWelcome to level 2 didn't think you would make it this far!")
-	number = random.randint(1,30)
-	number2 = random.randint(1,3)
-	# print(number)
-	print('\nFor this next part you will be asked to enter a number between 0 and 30 to try to guess a randomly generated number.')
-	# print(number)
-	print("\n\tYou've only got",
-		number2,
-		" hints\n")
-
-	count = 0
-
-	while count < number2:
-		count += 1
-
-		guess = int(input('\nPlease enter a number between 0 and 30:'))
-
-		if number == guess:
-			print("\nCongratulations you did it in ",
-				count, " try/tries")
-			break
-		elif number > guess:
-			print("\nYou guessed too small!")
-
-		elif number < guess:
-			print("\nYou Guessed too high!")
-           
-	if count >= number2 :
-		print("\n Better luck next time! The number is %d" % number)
-
-    
-
-
-
-
-#again the same thing but way more harder since this is the finale
-# level 3
-if number == guess:
-	print("\nWelcome to level 3 the last and final level! I will be sure to make this level extra hard.")
-	number = random.randint(1,40)
-	number2 = random.randint(1,2)
-	# print(number)
-	print('\nFor this next part you will be asked to enter a number between 0 and 40 to try to guess a randomly generated number.')
-	# print(number)
-	print("\n\tYou've only got",
-		number2,
-		" hints\n")
-
-	count = 0
-
-	while count < number2:
-		count += 1
-
-		guess = int(input('\nPlease enter a number between 0 and 40:'))
-
-		if number == guess:
-			print("\nCongratulations you did it in ",
-				count, " try/tries You finished all levels!")
-      
-			break
-		elif number > guess:
-			print("\nYou guessed too small!")
-		elif number < guess:
-			print("\nYou Guessed too high!")
-
-	if count >= number2 :
-		print("\n Better luck next time! The number is %d" % number)
+    for i, level in enumerate(levels, start=1):
+        if play_game(i, level["max_num"], level["max_hints"]):
+            if i < len(levels):
+                print("\nMoving on to the next level...\n")
+            else:
+                print("\nCongratulations! You finished all levels!")
+        else:
+            print("\nGame Over! You couldn't complete all levels.")
+            break
