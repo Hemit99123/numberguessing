@@ -1,5 +1,17 @@
 import random
 
+def binary_search(start, end, number):
+    # Binary search algorithm
+    while start <= end:
+        mid = (start + end) // 2
+        if mid == number:
+            return mid
+        elif mid < number:
+            start = mid + 1
+        else:
+            end = mid - 1
+    return -1
+
 def play_game(level, max_num, max_hints):
     print(f"\nWelcome to level {level} of this number guessing game!")
     print(f"\nFor this next part, you will be asked to enter a number between 0 and {max_num} to try to guess a randomly generated number.")
@@ -8,18 +20,26 @@ def play_game(level, max_num, max_hints):
 
     number = random.randint(1, max_num)
     count = 0
+    start, end = 1, max_num
 
     while count < max_hints:
         count += 1
-        guess = int(input(f'\nPlease enter a number between 0 and {max_num}:'))
+        guess = binary_search(start, end, number)
+
+        if guess == -1:
+            guess = random.randint(1, max_num)
+
+        print(f'\nGuess {count}: {guess}')
 
         if number == guess:
             print(f"\nCongratulations! You did it in {count} try/tries.")
             return True
         elif number > guess:
             print("\nYou guessed too small!")
-        elif number < guess:
+            start = guess + 1
+        else:
             print("\nYou guessed too high!")
+            end = guess - 1
 
     print(f"\nBetter luck next time! The number was {number}")
     return False
